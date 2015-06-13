@@ -39,7 +39,7 @@ def diff(a,func):
     return eval(a)
 
 def inte(a,b,func):
-    step = abs(b-a)/2000
+    step = abs(b-a)/5000.0
     x=a
     sum=0.0
     while x<=b:

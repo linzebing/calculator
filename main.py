@@ -2,8 +2,6 @@
 
 from easymath import *
 import mydraw
-def func_plot(expr, start = -5, end = 5):	#plot the graph of a function given by expr
-    mydraw.my_plot(expr,start,end)
 def buttonAction(show,ch):
     s = show.getText()
     s = s + ch
@@ -60,11 +58,11 @@ def FuncGraph():
     bPower = button(win,Point(7,8.7),1.7,1,"^")  
     bSqrt = button(win,Point(9,8.7),1.7,1,"sqrt")
     
-    bX = button(win,Point(1,9.9),1.7,1.0,"Var: X")
-    bDraw = button(win,Point(3,9.9),1.7,1,"Draw")
-    bDiff = button(win,Point(5,9.9),1.7,1,"Diff")
-    bInte = button(win,Point(7,9.9),1.7,1,"Integrate")
-    bSolve = button(win,Point(9,9.9),1.7,1,"Solve")
+    bDraw = button(win,Point(1,9.9),1.7,1,"Draw")
+    bDiff = button(win,Point(3,9.9),1.7,1,"Diff")
+    bInte = button(win,Point(5,9.9),1.7,1,"Integrate")
+    bDraw2 = button(win,Point(7,9.9),1.7,1,"Curve")
+    bX = button(win,Point(9,9.9),1.7,1.0,"Var: X")
     
 
     bEsc = button(win,Point(9.8,14.6),.4,.4,"X")
@@ -77,6 +75,7 @@ def FuncGraph():
     show.draw(win)
     
     p = win.getMouse()
+    ans = 0
     while not bEsc.clicked(p):
         try:
             p = win.getMouse()
@@ -119,7 +118,9 @@ def FuncGraph():
             elif bPi.clicked(p):
                 buttonAction(show,'pi') 
             elif bE.clicked(p):
-                buttonAction(show,'e') 
+                buttonAction(show,'*(10**') 
+            elif bDraw2.clicked(p):
+                mydraw.my_plot3(E4.getText(),E1.getText(),E2.getText())
             elif bAns.clicked(p):
                 buttonAction(show,str(ans))
             elif bEqu.clicked(p):
@@ -130,7 +131,7 @@ def FuncGraph():
             elif bBran2.clicked(p):
                 buttonAction(show,')')          
             elif bPower.clicked(p):
-                buttonAction(show,'**') 
+                buttonAction(show,'**')
             elif bSqrt.clicked(p):
                 buttonAction(show,'sqrt(')                
             elif bsin.clicked(p):
@@ -151,19 +152,25 @@ def FuncGraph():
                 s = s + '.'
                 show.setText(s)
             elif bInte.clicked(p):
-                a = inte(eval(E1.getText()), eval(E2.getText()), show.getText())
+                if (E4.getText()==""):
+                    a = inte(eval(E1.getText()), eval(E2.getText()), show.getText())
+                else:
+                    a = inte(eval(E1.getText()), eval(E2.getText()), E4.getText())
                 show.setText(str("%0.4f" % a))
             elif bX.clicked(p):
                 buttonAction(show,'x') 
             elif bDiff.clicked(p):
-                a = diff(eval(E3.getText()),show.getText())
+                if (E4.getText()==""):
+                    a = diff(eval(E3.getText()),show.getText())
+                else:
+                    a = diff(eval(E3.getText()),E4.getText())
                 show.setText(str("%0.4f" % a))
             elif bDraw.clicked(p):
                 s = show.getText()
                 if (E4.getText()==""):
-                    func_plot(s,eval(E1.getText()),eval(E2.getText()))
+                    mydraw.my_plot(s,E1.getText(),E2.getText())
                 else:
-                    mydraw.my_plot2(E4.getText(),eval(E1.getText()),eval(E2.getText()))
+                    mydraw.my_plot2(E4.getText(),E1.getText(),E2.getText())
 
                 
         except Exception as e:

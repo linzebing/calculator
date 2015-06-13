@@ -11,6 +11,12 @@ def get_max(num):
     else:
 	return num*0.9
 def my_plot(expr,start, end):
+    if (start == ""):
+        start = "-5"
+    if (end==""):
+        end = "5"
+    start = eval(start)
+    end = eval(end)
     x = np.linspace(start,end,256, endpoint = True)
     grid(True)
     C = eval(expr)
@@ -27,6 +33,12 @@ def my_plot(expr,start, end):
     ylim(get_min(C.min()),get_max(C.max()))
     show()
 def my_plot2(expressions,start, end):
+    if (start == ""):
+        start = "-5"
+    if (end==""):
+        end = "5"
+    start = eval(start)
+    end = eval(end)
     x = np.linspace(start,end,256, endpoint = True)
     grid(True)
     ax = gca()
@@ -53,4 +65,24 @@ def my_plot2(expressions,start, end):
         fill_between(x,C, get_max(my_y_max), where = C <= get_max(C.max()), facecolor = 'white', interpolate = True)
     xlim(x.min(),x.max())
     ylim(get_min(my_y_min),get_max(my_y_max))
+    show()
+
+def my_plot3(expressions,start = "",end = ""):
+    if (start == ""):
+        start = "0"
+    if (end==""):
+        end = "2*pi"
+    start = eval(start)
+    end = eval(end)
+    grid(True)
+    ax = gca()
+    ax.spines['right'].set_color('none')
+    ax.spines['top'].set_color('none')
+    ax.xaxis.set_ticks_position('bottom')
+    ax.spines['bottom'].set_position(('data',0))
+    ax.yaxis.set_ticks_position('left')
+    ax.spines['left'].set_position(('data',0))
+    exprs = expressions.split(';')
+    t = np.linspace(start,end,256, endpoint = True)
+    plot(eval(exprs[0]),eval(exprs[1]))
     show()
