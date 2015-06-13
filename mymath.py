@@ -20,6 +20,10 @@ class button:
         return self.xmin <= p.getX() <= self.xmax and \
                self.ymin <= p.getY() <= self.ymax
 
+def buttonAction(show,ch):
+    s = show.getText()
+    s = s + ch
+    show.setText(s)
     
 def drawlabel(win,center,face,size,style,label):
     x,y=center.getX(), center.getY()
@@ -39,13 +43,13 @@ def diff(a,func):
     return eval(a)
 
 def inte(a,b,func):
-    step = abs(b-a)/5000.0
+    step = abs(b-a)/100000.0
     x=a
     sum=0.0
     while x<=b:
         sum=sum+step*eval(func)
         x=x+step
-    a='%0.12f'%(sum)
+    a='%0.4f'%(sum)
     return eval(a)
 
     

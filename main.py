@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-
-from easymath import *
+from mymath import *
 import mydraw
-def buttonAction(show,ch):
-    s = show.getText()
-    s = s + ch
-    show.setText(s)
+
 def FuncGraph():
     win = GraphWin("Calculator",400,647)
     win.setCoords(0.0,-1.0,10,15)
@@ -124,7 +120,10 @@ def FuncGraph():
             elif bAns.clicked(p):
                 buttonAction(show,str(ans))
             elif bEqu.clicked(p):
-                ans = eval(show.getText())
+                if (E4.getText()!=""):
+                    ans = eval(E4.getText())
+                else:
+                    ans = eval(show.getText())
                 show.setText(str(ans))
             elif bBran1.clicked(p):
                 buttonAction(show,'(')            
@@ -168,11 +167,9 @@ def FuncGraph():
             elif bDraw.clicked(p):
                 s = show.getText()
                 if (E4.getText()==""):
-                    mydraw.my_plot(s,E1.getText(),E2.getText())
+                    show.setText(mydraw.my_plot(s,E1.getText(),E2.getText()))
                 else:
-                    mydraw.my_plot2(E4.getText(),E1.getText(),E2.getText())
-
-                
+                    show.setText(mydraw.my_plot2(E4.getText(),E1.getText(),E2.getText()))
         except Exception as e:
             print e
             show.setText("Math Error!")
